@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pastdarg'om tumani 65-sonli Umumta'lim Maktabi — Rasmiy Veb-Sayti</title>
+  <meta name="description" content="Pastdarg'om tumani 65-sonli umumta'lim maktabining rasmiy veb-sayti. 65-MaktabAI yordamchisi, to'garaklar, yangiliklar, dars jadvali, reyting va elektron kutubxona.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <aside class="top-bar" aria-label="E'lonlar">
+    <div class="container top-bar-content">
+      <div class="top-bar-left">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        <span>Yangi o'quv choragi: Barcha fan to'garaklari va "65-MaktabAI" multimodal yordamchisi faol ishlamoqda!</span>
+      </div>
+      <div class="top-bar-right">
+        <!-- Exact Display Email with actual mailto -->
+        <a href="mailto:y.u.umarxon2010@gmail.com" class="top-link" title="Maktub yo'llash">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <span>65maktab.uz@gmail.com</span>
+        </a>
+        <a href="tel:+998772936488" class="top-link" title="Telefon qilish">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>+998 77 293 64 88</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- HEADER & NAVBAR -->
+  <header class="site-header" id="header">
+    <div class="container header-container">
+      <a href="#bosh-sahifa" class="brand-logo" aria-label="Bosh sahifa">
+        <div class="logo-shield">
+          <svg viewBox="0 0 36 40" fill="none" class="crest-svg" aria-hidden="true">
+            <path d="M18 2L3 8V19C3 28.5 9.5 35.8 18 38C26.5 35.8 33 28.5 33 19V8L18 2Z" fill="url(#crestGrad)" stroke="#F59E0B" stroke-width="2"/>
+            <path d="M18 9L22 17H14L18 9Z" fill="#F59E0B"/>
+            <path d="M10 24C10 21 14 19 18 19C22 19 26 21 26 24V26H10V24Z" fill="#FFFFFF"/>
+            <defs>
+              <linearGradient id="crestGrad" x1="3" y1="2" x2="33" y2="38" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#0F2856"/>
+                <stop offset="1" stop-color="#07132B"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="logo-num">65</span>
+        </div>
+        <div class="brand-text">
+          <span class="school-title">Pastdarg'om tumani</span>
+          <span class="school-subtitle">65-sonli Umumta'lim Maktabi</span>
+        </div>
+      </a>
+
+      <!-- DESKTOP NAV -->
+      <nav class="main-nav" aria-label="Asosiy menyu">
+        <ul class="nav-list">
+          <li><a href="#bosh-sahifa" class="nav-link active">Bosh sahifa</a></li>
+          <li><a href="#haqida" class="nav-link">Maktab haqida</a></li>
+          <li><a href="#togaraklar" class="nav-link">To'garaklar</a></li>
+          <li><a href="#yangiliklar" class="nav-link">Yangiliklar</a></li>
+          <li><a href="#jadval" class="nav-link">Dars jadvali</a></li>
+          <li><a href="#reyting" class="nav-link">Reyting</a></li>
+          <li><a href="#kutubxona" class="nav-link">Kutubxona</a></li>
+          <li><a href="#aloqa" class="nav-link">Aloqa</a></li>
+        </ul>
+      </nav>
+
+      <!-- HEADER ACTIONS -->
+      <div class="header-actions">
+        <!-- Community Chat Open Button -->
+        <button id="openCommunityChatBtn" class="btn btn-outline-gold" title="O'quvchilar jamoaviy chati">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span>Jamoaviy Chat</span>
+        </button>
+
+        <a href="admin/index.html" class="btn btn-secondary-subtle" title="Decap CMS boshqaruv paneli" target="_blank" rel="noopener">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Admin</span>
+        </a>
+
+        <!-- Hamburger toggle -->
+        <button id="burgerBtn" class="burger-btn" aria-label="Menyuni ochish" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- MOBILE MENU DRAWER -->
+    <div id="mobileMenu" class="mobile-menu" aria-hidden="true">
+      <div class="mobile-menu-inner">
+        <ul class="mobile-nav-list">
+          <li><a href="#bosh-sahifa" class="mobile-nav-link">Bosh sahifa</a></li>
+          <li><a href="#haqida" class="mobile-nav-link">Maktab haqida</a></li>
+          <li><a href="#togaraklar" class="mobile-nav-link">To'garaklar ro'yxati</a></li>
+          <li><a href="#yangiliklar" class="mobile-nav-link">Yangiliklar va Maqolalar</a></li>
+          <li><a href="#jadval" class="mobile-nav-link">Dars jadvali (1 & 2-smena)</a></li>
+          <li><a href="#reyting" class="mobile-nav-link">O'quvchilar Reytingi</a></li>
+          <li><a href="#ustozlar" class="mobile-nav-link">O'qituvchilar</a></li>
+          <li><a href="#kutubxona" class="mobile-nav-link">Elektron Kutubxona (PDF)</a></li>
+          <li><a href="#aloqa" class="mobile-nav-link">Aloqa va Joylashuv</a></li>
+        </ul>
+        <div class="mobile-menu-footer">
+          <button id="mobileCommunityBtn" class="btn btn-gold btn-block">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span>O'quvchilar Jamoaviy Chati</span>
+          </button>
+          <a href="admin/index.html" class="btn btn-secondary-subtle btn-block" style="margin-top: 8px;">
+            <span>Admin Panel (Decap CMS)</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. HERO SECTION -->
+    <section class="hero-section" id="bosh-sahifa">
+      <div class="hero-overlay"></div>
+      <div class="container hero-container">
+        <div class="hero-badge">
+          <svg class="badge-star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span>Pastdarg'om tumani namunali ta'lim maskani</span>
+        </div>
+        <h1 class="hero-title">
+          Kelajak bunyodkorlari <span class="highlight-gold">tarbiya topadigan</span> maskan
+        </h1>
+        <p class="hero-desc">
+          Pastdarg'om tumani 65-sonli umumta'lim maktabida zamonaviy axborot texnologiyalari, chuqurlashtirilgan fan dasturlari, xalqaro tillar va intellektual "65-MaktabAI" muhiti!
+        </p>
+        <div class="hero-buttons">
+          <a href="#haqida" class="btn btn-gold btn-lg">
+            <span>Batafsil ma'lumot</span>
+            <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a href="#jadval" class="btn btn-glass btn-lg">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+            <span>Dars jadvali</span>
+          </a>
+          <a href="#togaraklar" class="btn btn-outline-white btn-lg">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span>To'garaklarga a'zo bo'lish</span>
+          </a>
+        </div>
+
+        <!-- STATS COUNTER -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-num">1,240+</div>
+            <div class="stat-label">Iqtidorli o'quvchilar</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">78 nafar</div>
+            <div class="stat-label">Tajribali pedagoglar</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">35+</div>
+            <div class="stat-label">Fan olimpiadasi sovrindorlari</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">92%</div>
+            <div class="stat-label">OTM talabasi bo'lish ko'rsatkichi</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. MAKTAB HAQIDA (ABOUT) -->
+    <section class="section about-section" id="haqida">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Bizning dargoh</span>
+          <h2 class="section-title">Pastdarg'om tumani 65-sonli maktab haqida</h2>
+          <p class="section-subtitle">
+            Har bir o'quvchining yashirin iste'dodini kashf qilish, ularni yetuk mutaxassis va vatanparvar inson etib tarbiyalash bosh maqsadimizdir.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="feature-card">
+            <div class="feature-icon bg-blue-tint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <h3 class="feature-title">Oliy toifali ustozlar jamoasi</h3>
+            <p class="feature-desc">Maktabimizda ko'p yillik pedagogik tajribaga ega xalq ta'limi a'lochilari, magistrlar va yosh innovatsion o'qituvchilar saboq beradi.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon bg-gold-tint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+            </div>
+            <h3 class="feature-title">Zamonaviy IT & Kompyuter sinfi</h3>
+            <p class="feature-desc">Optik tolali yuqori tezlikdagi internet, so'nggi kompyuterlar, interaktiv aqlli doskalar va Python/Web laboratoriyasi mavjud.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon bg-emerald-tint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <h3 class="feature-title">Boy kutubxona va Media zal</h3>
+            <p class="feature-desc">10,000 dan ziyod badiiy va ilmiy kitoblar fondi hamda har bir darslikning raqamli Google Drive PDF nusxalari ochiq berilgan.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon bg-purple-tint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+            </div>
+            <h3 class="feature-title">Sport va Ijodiy maydonchalar</h3>
+            <p class="feature-desc">Yopiq sport majmuasi, voleybol/basketbol zali, shaxmat klubi va yosh musiqachi hamda rassomlar uchun barcha sharoitlar yaratilgan.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. TO'GARAKLAR RO'YXATI (CLUBS SECTION - NEW) -->
+    <section class="section clubs-section" id="togaraklar">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Iqtidor va Mahorat</span>
+          <h2 class="section-title">Maktabimizdagi Fan va Qiziqish To'garaklari</h2>
+          <p class="section-subtitle">
+            Darsdan so'ng bo'sh vaqtlarni unumli o'tkazish, dasturlash, chet tillari va sport yo'nalishlarida chuqur bilim olish imkoniyati.
+          </p>
+        </div>
+
+        <div class="clubs-grid" id="clubsGrid">
+          <!-- Dynamic cards populated by script.js -->
+        </div>
+
+        <div class="club-banner">
+          <div class="club-banner-info">
+            <h4>Boshqa to'garak ochish yoki taklif kiritmoqchimisiz?</h4>
+            <p>Maktabimiz Telegram boti orqali yangi to'garaklar uchun ariza yoki taklif qoldirishingiz mumkin.</p>
+          </div>
+          <a href="http://t.me/pastdargom_65maktab_uzbot" target="_blank" rel="noopener" class="btn btn-gold">
+            <span>Telegram Botga yozish</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. YANGILIKLAR VA MAQOLALAR TASMASI (NEWS & ARTICLES - NEW) -->
+    <section class="section news-section" id="yangiliklar">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Maktab hayoti</span>
+          <h2 class="section-title">So'nggi Yangiliklar va Maqolalar</h2>
+          <p class="section-subtitle">
+            O'quvchilarimiz yutuqlari, maktab tadbirlari va xalq ta'limi yangiliklaridan birinchi bo'lib xabardor bo'ling.
+          </p>
+        </div>
+
+        <div class="news-grid" id="newsGrid">
+          <!-- Dynamic news cards populated by script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. DARS JADVALI (SCHEDULE SECTION) -->
+    <section class="section schedule-section" id="jadval">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">O'quv jarayoni</span>
+          <h2 class="section-title">Dars Jadvali va Qo'ng'iroqlar Vaqti</h2>
+          <p class="section-subtitle">
+            1-smena va 2-smena darslari, tanaffus va dars vaqtlari bilan qulay shaklda tanishing.
+          </p>
+        </div>
+
+        <!-- SHIFT SELECTOR TABS -->
+        <div class="shift-tabs" role="tablist">
+          <button class="shift-tab active" data-shift="1" role="tab" aria-selected="true">
+            <span class="shift-badge">1-SMENA</span>
+            <span class="shift-title">08:00 — 12:55 (8, 9, 10, 11-sinflar)</span>
+          </button>
+          <button class="shift-tab" data-shift="2" role="tab" aria-selected="false">
+            <span class="shift-badge">2-SMENA</span>
+            <span class="shift-title">13:15 — 17:50 (5, 6, 7-sinflar)</span>
+          </button>
+        </div>
+
+        <!-- BELL SCHEDULE PREVIEW -->
+        <div class="bell-schedule-box" id="bellScheduleBox">
+          <!-- Injected via script.js -->
+        </div>
+
+        <!-- CLASS FILTER CONTROLS -->
+        <div class="schedule-controls">
+          <div class="control-group">
+            <label for="classSelect">Sinfni tanlang:</label>
+            <select id="classSelect" class="form-select">
+              <option value="9-A">9-"A" sinf (1-smena)</option>
+              <option value="10-B">10-"B" sinf (1-smena)</option>
+              <option value="11-A">11-"A" sinf (1-smena)</option>
+              <option value="6-B">6-"B" sinf (2-smena)</option>
+            </select>
+          </div>
+          <div class="schedule-note">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+            <span>Dars vaqtlari har bir akademik soat uchun 45 daqiqa etib belgilangan.</span>
+          </div>
+        </div>
+
+        <!-- SCHEDULE TABLE -->
+        <div class="table-responsive">
+          <table class="schedule-table" id="scheduleTable">
+            <thead>
+              <tr>
+                <th>Soat</th>
+                <th>Dars Vaqti</th>
+                <th>Fan Nomi</th>
+                <th>O'qituvchi</th>
+                <th>Xona</th>
+                <th>Tanaffus</th>
+              </tr>
+            </thead>
+            <tbody id="scheduleBody">
+              <!-- Populated by script.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. O'QUVCHILAR REYTINGI (TOP-10 RANKINGS) -->
+    <section class="section rating-section" id="reyting">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Iqtidor va Harakat</span>
+          <h2 class="section-title">O'quvchilar va Sinflar TOP-10 Reytingi</h2>
+          <p class="section-subtitle">
+            Baholashsiz, faqat fan olimpiadalari, Zakovat musobaqalari, kitobxonlik va maktab hayotidagi faollik mezonlariga asosan shakllantirilgan rasmiy reyting.
+          </p>
+        </div>
+
+        <div class="rating-tabs">
+          <button class="rating-tab-btn active" id="tabStudentsBtn">Iqtidorli O'quvchilar TOP-10</button>
+          <button class="rating-tab-btn" id="tabClassesBtn">Faol Sinflar Reytingi</button>
+        </div>
+
+        <div class="rating-container" id="ratingContainer">
+          <!-- Populated by script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. O'QITUVCHILAR BO'LIMI (TEACHERS) -->
+    <section class="section teachers-section" id="ustozlar">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Pedagoglar jamoasi</span>
+          <h2 class="section-title">Maktabimiz Faxriy va Tajribali O'qituvchilari</h2>
+          <p class="section-subtitle">
+            Kelajak avlodga chuqur bilim va ma'rifat ulashayotgan oliy toifali mutaxassislarimiz.
+          </p>
+        </div>
+
+        <div class="teachers-grid" id="teachersGrid">
+          <!-- Populated by script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. ELEKTRON KUTUBXONA (LIBRARY SECTION) -->
+    <section class="section library-section" id="kutubxona">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Ziyo maskani</span>
+          <h2 class="section-title">Elektron Kutubxona va Darsliklar</h2>
+          <p class="section-subtitle">
+            Umumta'lim maktabi darsliklari va qo'llanmalari. Har bir kitobni saytda o'qish va Google Drive PDF orqali to'g'ridan-to'g'ri yuklab olish mumkin.
+          </p>
+        </div>
+
+        <div class="library-search-bar">
+          <div class="search-input-wrap">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="text" id="bookSearchInput" placeholder="Kitob, muallif yoki fan nomi bo'yicha qidiring...">
+          </div>
+          <div class="grade-filters" id="gradeFilters">
+            <button class="grade-chip active" data-grade="all">Barchasi</button>
+            <button class="grade-chip" data-grade="7">7-sinf</button>
+            <button class="grade-chip" data-grade="9">9-sinf</button>
+            <button class="grade-chip" data-grade="10">10-sinf</button>
+            <button class="grade-chip" data-grade="11">11-sinf</button>
+          </div>
+        </div>
+
+        <div class="books-grid" id="booksGrid">
+          <!-- Populated by script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. ALOQA VA JOYLASHUV (CONTACT & TELEGRAM BOT) -->
+    <section class="section contact-section" id="aloqa">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Bog'lanish</span>
+          <h2 class="section-title">Maktab Ma'muriyati Bilan Aloqa</h2>
+          <p class="section-subtitle">
+            Savollar, qabul jarayoni, taklif yoki murojaatlaringiz bo'lsa, quyidagi rasmiy kanallar orqali biz bilan bog'laning.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- INFO CARD -->
+          <div class="contact-info-card">
+            <h3 class="contact-card-title">Maktab Rekvizitlari</h3>
+            <p class="contact-card-desc">Samarqand viloyati, Pastdarg'om tumani 65-sonli umumta'lim maktabi rasmiy ma'muriyati.</p>
+
+            <ul class="contact-list">
+              <li class="contact-item">
+                <div class="contact-icon bg-blue-tint">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                  <div class="item-label">Manzil:</div>
+                  <div class="item-value">Samarqand viloyati, Pastdarg'om tumani, Maktab ko'chasi 65-uy</div>
+                </div>
+              </li>
+
+              <li class="contact-item">
+                <div class="contact-icon bg-gold-tint">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <div>
+                  <div class="item-label">Telefon raqam:</div>
+                  <!-- Exact phone href -->
+                  <a href="tel:+998772936488" class="item-value link">+998 77 293 64 88</a>
+                </div>
+              </li>
+
+              <li class="contact-item">
+                <div class="contact-icon bg-emerald-tint">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                </div>
+                <div>
+                  <div class="item-label">Rasmiy Elektron Pochta:</div>
+                  <!-- Exact requirement: text displays 65maktab.uz@gmail.com, mailto goes to y.u.umarxon2010@gmail.com -->
+                  <a href="mailto:y.u.umarxon2010@gmail.com" class="item-value link" title="Pochta orqali yozish">
+                    65maktab.uz@gmail.com
+                  </a>
+                </div>
+              </li>
+
+              <li class="contact-item">
+                <div class="contact-icon bg-purple-tint">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                </div>
+                <div>
+                  <div class="item-label">Telegram Bot & Support:</div>
+                  <a href="http://t.me/pastdargom_65maktab_uzbot" target="_blank" rel="noopener" class="item-value link">
+                    @pastdargom_65maktab_uzbot
+                  </a>
+                </div>
+              </li>
+            </ul>
+
+            <div class="support-action-box">
+              <a href="http://t.me/pastdargom_65maktab_uzbot" target="_blank" rel="noopener" class="btn btn-gold btn-block">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                <span>Telegram Support Botga o'tish</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- FORM CARD (Directs to Telegram Bot) -->
+          <div class="contact-form-card">
+            <h3 class="contact-card-title">Murojaat va Taklif Qoldirish</h3>
+            <p class="contact-card-desc">Formani to'ldirib "Yuborish" tugmasini bosishingiz bilan ma'lumotlaringiz to'g'ridan-to'g'ri maktab rasmiy Telegram botiga yo'naltiriladi.</p>
+
+            <form id="contactForm" class="contact-form">
+              <div class="form-group">
+                <label for="senderName">Ism va Familiyangiz *</label>
+                <input type="text" id="senderName" class="form-control" placeholder="Masalan: Umarov Sardor" required>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="senderPhone">Telefon raqamingiz *</label>
+                  <input type="tel" id="senderPhone" class="form-control" placeholder="+998 90 123 45 67" required>
+                </div>
+                <div class="form-group">
+                  <label for="senderRole">Kim sifatida murojaat qilyapsiz?</label>
+                  <select id="senderRole" class="form-control">
+                    <option value="Ota-ona">Ota-ona</option>
+                    <option value="O'quvchi">O'quvchi</option>
+                    <option value="Bitiruvchi">Bitiruvchi</option>
+                    <option value="Boshqa">Mehmon / Boshqa</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="senderMessage">Xabaringiz yoki taklifingiz *</label>
+                <textarea id="senderMessage" class="form-control" rows="4" placeholder="Murojaatingiz matnini batafsil yozing..." required></textarea>
+              </div>
+
+              <!-- Button redirects to Telegram Bot -->
+              <button type="submit" id="submitFormBtn" class="btn btn-primary btn-block">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                <span>Yuborish (Telegram Bot orqali)</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand-logo footer-logo">
+            <span class="logo-num">65</span>
+            <div>
+              <div class="school-title">Pastdarg'om tumani</div>
+              <div class="school-subtitle">65-sonli Umumta'lim Maktabi</div>
+            </div>
+          </div>
+          <p class="footer-desc">
+            Samarqand viloyati, Pastdarg'om tumanida joylashgan zamonaviy ta'lim muassasasi. Ilm, tarbiya, intellektual salohiyat va axborot texnologiyalari markazi.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <h4>Tezkor havolalar</h4>
+          <ul>
+            <li><a href="#bosh-sahifa">Bosh sahifa</a></li>
+            <li><a href="#togaraklar">To'garaklar ro'yxati</a></li>
+            <li><a href="#yangiliklar">Yangiliklar va Maqolalar</a></li>
+            <li><a href="#jadval">Dars jadvali</a></li>
+            <li><a href="#reyting">TOP-10 Reyting</a></li>
+            <li><a href="#kutubxona">Elektron Kutubxona (PDF)</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h4>Boshqaruv & Aloqa</h4>
+          <ul>
+            <li><a href="admin/index.html" target="_blank" rel="noopener">Decap CMS Admin Panel</a></li>
+            <li><a href="mailto:y.u.umarxon2010@gmail.com">65maktab.uz@gmail.com</a></li>
+            <li><a href="tel:+998772936488">+998 77 293 64 88</a></li>
+            <li><a href="http://t.me/pastdargom_65maktab_uzbot" target="_blank" rel="noopener">Telegram Support Bot</a></li>
+            <li><button id="footerCodeBtn" class="footer-code-btn">Sayt Kodlarini Ko'rish / Yuklab olish</button></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Pastdarg'om tumani 65-sonli umumta'lim maktabi. Barcha huquqlar himoyalangan.</p>
+        <div class="social-links">
+          <a href="http://t.me/pastdargom_65maktab_uzbot" target="_blank" rel="noopener" aria-label="Telegram Bot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+          </a>
+          <a href="https://t.me/pastdargom_65maktab" target="_blank" rel="noopener" aria-label="Telegram Kanal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m16 8-8 5 4 1 2 4 2-10z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><polygon points="10 15 15 12 10 9 10 15"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- FLOATING "65-MAKTABAI" BUTTON & MULTIMODAL CHAT MODAL                     -->
+  <!-- ========================================================================= -->
+  <div class="ai-floating-container">
+    <button id="openAiModalBtn" class="ai-fab-btn" aria-label="65-MaktabAI yordamchisini ochish" title="65-MaktabAI: Multimodal savol-javob va rasm yaratish">
+      <div class="ai-fab-pulse"></div>
+      <div class="ai-fab-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+          <circle cx="12" cy="12" r="4"/>
+        </svg>
+      </div>
+      <span class="ai-fab-text">65-MaktabAI</span>
+    </button>
+  </div>
+
+  <!-- 65-MaktabAI Chat Modal -->
+  <div id="aiChatModal" class="chat-modal-backdrop" aria-hidden="true">
+    <div class="chat-modal-window">
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <div class="ai-avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="4"/></svg>
+          </div>
+          <div>
+            <div class="chat-title">65-MaktabAI</div>
+            <div class="chat-status">
+              <span class="status-indicator"></span>
+              <span>Multimodal O'qituvchi & Tasvir Yaratuvchi</span>
+            </div>
+          </div>
+        </div>
+        <div class="chat-header-actions">
+          <button id="clearAiChatBtn" class="chat-btn-icon" title="Suhbatni tozalash">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+          </button>
+          <button id="closeAiModalBtn" class="chat-btn-icon" aria-label="Yopish">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick prompts chips -->
+      <div class="chat-chips-bar">
+        <button class="chip-btn" data-prompt="Matematika: 10-sinf kvadrat tenglamalarni yechish qoidasini tushuntirib ber.">📐 Matematika</button>
+        <button class="chip-btn" data-prompt="Menga rasmini chizib ber: Quyosh tizimidagi sayyoralar va zamonaviy kosmik stansiya">🎨 Rasm chizish</button>
+        <button class="chip-btn" data-prompt="Ingliz tili: 'Present Perfect' zamoni haqida 3 ta misol bilan tushuntir.">🇬🇧 Ingliz tili</button>
+        <button class="chip-btn" data-prompt="Maktabimizdagi IT va Shaxmat to'garaklari qachon o'tkaziladi?">🏫 To'garaklar</button>
+      </div>
+
+      <!-- Messages Body -->
+      <div class="chat-messages" id="aiChatMessages">
+        <div class="chat-bubble ai">
+          <div class="bubble-content">
+            <p><strong>Assalomu alaykum!</strong> Men Pastdarg'om tumani 65-sonli maktabining <strong>65-MaktabAI</strong> virtual o'qituvchisiman.</p>
+            <p>Sizga darslar, uy vazifalari, formulalar va to'garaklar bo'yicha yordam bera olaman.</p>
+            <div class="ai-features-hint">
+              <span>📸 <strong>Vision tahlili:</strong> Masala yoki daftar suratini biriktiring, yechimini ko'rsataman.</span><br>
+              <span>🎨 <strong>Rasm yaratish:</strong> "Menga rasmini chizib ber: ..." deb yozing yoki rasm tugmasini bosing!</span>
+            </div>
+          </div>
+          <span class="bubble-time">Hozir</span>
+        </div>
+      </div>
+
+      <!-- Image Preview Strip if user attaches an image -->
+      <div id="attachedImagePreviewStrip" class="attachment-preview-strip" style="display: none;">
+        <div class="attachment-badge">
+          <img id="attachedImgThumb" src="" alt="Biriktirilgan rasm">
+          <span id="attachedImgName">rasm.jpg</span>
+          <button id="removeAttachedImgBtn" title="Olib tashlash">×</button>
+        </div>
+      </div>
+
+      <!-- Chat Input Area -->
+      <form id="aiChatForm" class="chat-input-bar">
+        <!-- Hidden file input for vision analysis -->
+        <input type="file" id="aiImageFileInput" accept="image/*" style="display: none;">
+        
+        <button type="button" id="aiAttachBtn" class="input-tool-btn" title="Rasm biriktirish (Vision tahlili)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+        </button>
+
+        <button type="button" id="aiGenerateImageBtn" class="input-tool-btn gold" title="Rasm chizdirish (AI Image Generation)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+        </button>
+
+        <input type="text" id="aiChatInput" class="chat-text-input" placeholder="Savol yozing yoki 'Menga rasmini chizib ber: ...'" autocomplete="off">
+        
+        <button type="submit" id="aiSendBtn" class="chat-send-btn" aria-label="Yuborish">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- O'QUVCHILAR UCHUN JAMOAVIY CHAT MODALI (COMMUNITY CHAT)                     -->
+  <!-- ========================================================================= -->
+  <div id="communityChatModal" class="chat-modal-backdrop" aria-hidden="true">
+    <div class="community-modal-window">
+      <div class="chat-header bg-navy">
+        <div class="chat-header-info">
+          <div class="community-avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div>
+            <div class="chat-title">65-Maktab O'quvchilari Jamoaviy Chati</div>
+            <div class="chat-status">
+              <span class="status-indicator"></span>
+              <span>Do'stona muloqot va darslarni birgalikda muhokama qilish</span>
+            </div>
+          </div>
+        </div>
+        <div class="chat-header-actions">
+          <button id="closeCommunityModalBtn" class="chat-btn-icon" aria-label="Yopish">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="community-messages" id="communityMessagesList">
+        <!-- Injected via script.js -->
+      </div>
+
+      <form id="communityForm" class="community-input-bar">
+        <div class="community-author-select">
+          <input type="text" id="communityAuthor" class="author-name-input" placeholder="Ismingiz (Masalan: Sardor)" value="Iqtidorli O'quvchi">
+          <select id="communityGrade" class="author-grade-select">
+            <option value="9-A">9-A sinf</option>
+            <option value="10-A">10-A sinf</option>
+            <option value="10-B">10-B sinf</option>
+            <option value="11-A">11-A sinf</option>
+            <option value="8-V">8-V sinf</option>
+            <option value="7-A">7-A sinf</option>
+          </select>
+        </div>
+        <div class="community-input-row">
+          <input type="text" id="communityText" class="chat-text-input" placeholder="Xabaringizni yozing..." required>
+          <button type="submit" class="btn btn-gold">
+            <span>Yuborish</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ARTICLE READER MODAL (YANGILIKNI TO'LIQ O'QISH) -->
+  <div id="articleModal" class="chat-modal-backdrop" aria-hidden="true">
+    <div class="article-modal-window">
+      <div class="article-modal-header">
+        <span class="badge" id="artModalCategory">Yutuqlarimiz</span>
+        <button id="closeArticleModalBtn" class="chat-btn-icon">×</button>
+      </div>
+      <div class="article-modal-body">
+        <h2 id="artModalTitle">Maqola sarlavhasi</h2>
+        <div class="article-meta">
+          <span id="artModalDate">12-Oktyabr, 2026</span> • <span id="artModalAuthor">Direktor o'rinbosari</span>
+        </div>
+        <img id="artModalImg" src="" alt="Maqola rasmi" class="article-modal-image">
+        <div id="artModalContent" class="article-modal-text"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KODLARNI KO'RISH VA EKSPORT QILISH MODALI -->
+  <div id="codeExportModal" class="chat-modal-backdrop" aria-hidden="true">
+    <div class="code-modal-window">
+      <div class="code-modal-header">
+        <div class="code-modal-title">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <span>Sayt Manba Kodlari (HTML, CSS, JS va Admin Decap CMS)</span>
+        </div>
+        <button id="closeCodeModalBtn" class="chat-btn-icon">×</button>
+      </div>
+
+      <div class="code-modal-tabs">
+        <button class="code-tab-btn active" data-file="html">index.html</button>
+        <button class="code-tab-btn" data-file="css">style.css</button>
+        <button class="code-tab-btn" data-file="js">script.js</button>
+        <button class="code-tab-btn" data-file="admin_html">admin/index.html</button>
+        <button class="code-tab-btn" data-file="admin_yml">admin/config.yml</button>
+      </div>
+
+      <div class="code-modal-toolbar">
+        <span id="codeFileNameDisplay" class="current-file-label">index.html (Asosiy struktura)</span>
+        <div class="code-actions">
+          <button id="copyCodeBtn" class="btn btn-outline-gold btn-sm">Nusxalash (Copy)</button>
+          <button id="downloadCodeBtn" class="btn btn-gold btn-sm">Yuklab olish (.zip / fayl)</button>
+        </div>
+      </div>
+
+      <div class="code-editor-view">
+        <pre><code id="codeSnippetContent">Kod yuklanmoqda...</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOK PREVIEW MODAL -->
+  <div id="bookModal" class="chat-modal-backdrop" aria-hidden="true">
+    <div class="book-modal-window">
+      <div class="book-modal-header">
+        <h3 id="bookModalTitle">Kitob nomi</h3>
+        <button id="closeBookModalBtn" class="chat-btn-icon">×</button>
+      </div>
+      <div class="book-modal-body">
+        <div class="book-modal-info">
+          <p><strong>Fan:</strong> <span id="bookModalSubject"></span></p>
+          <p><strong>Muallif(lar):</strong> <span id="bookModalAuthor"></span></p>
+          <p><strong>Sinf:</strong> <span id="bookModalGrade"></span>-sinf</p>
+          <p><strong>Hajmi:</strong> <span id="bookModalSize"></span> (PDF)</p>
+          <p id="bookModalDesc" class="book-desc-text"></p>
+        </div>
+        <div class="book-modal-actions">
+          <a id="bookModalDriveRead" href="#" target="_blank" rel="noopener" class="btn btn-primary">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            <span>Google Drive'da O'qish</span>
+          </a>
+          <a id="bookModalDriveDownload" href="#" target="_blank" rel="noopener" class="btn btn-gold">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            <span>PDF Yuklab olish</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

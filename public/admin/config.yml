@@ -1,0 +1,157 @@
+# ==============================================================================
+# PASTDARG'OM TUMANI 65-SONLI UMUMTA'LIM MAKTABI — DECAP CMS CONFIGURATION
+# Bosh Ega (Owner) va Maktab Mas'ullari (Admin) boshqaruv paneli
+# ==============================================================================
+
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+locale: "uz"
+
+roles:
+  - name: "owner"
+    label: "Bosh Ega (Super Admin / Direktor)"
+    description: "Barcha bo'limlar, to'garaklar, dars jadvallari, kutubxona, yangiliklar va tizim sozlamalarini to'liq boshqarish huquqi."
+    permissions:
+      - "manage_users"
+      - "edit_settings"
+      - "publish_all"
+  - name: "admin"
+    label: "Maktab Mas'uli (O'qituvchi / Muharrir)"
+    description: "To'garaklar, yangiliklar va dars jadvalini kiritish hamda tahrirlash huquqi."
+
+collections:
+  # 1. TO'GARAKLAR RO'YXATI (CLUBS)
+  - name: "togaraklar"
+    label: "To'garaklar (Clubs)"
+    label_singular: "To'garak"
+    folder: "content/togaraklar"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "To'garak nomi", name: "title", widget: "string" }
+      - { label: "Kategoriya", name: "category", widget: "select", options: ["Axborot Texnologiyalari", "Chet tillari", "Aqliy Sport", "Muhandislik & STEM", "Tabiiy Fanlar", "Sport va Salomatlik"] }
+      - { label: "To'garak rahbari (Ustoz)", name: "teacher", widget: "string" }
+      - { label: "Ustoz unvoni/toifasi", name: "teacherRole", widget: "string" }
+      - { label: "Ustoz rasmi", name: "teacherPhoto", widget: "image", required: false }
+      - { label: "Dars kunlari va vaqti", name: "schedule", widget: "string", hint: "Masalan: Seshanba, Payshanba | 15:00 - 16:30" }
+      - { label: "Xona / Bino", name: "room", widget: "string" }
+      - { label: "Mo'ljallangan sinflar", name: "targetGrades", widget: "string" }
+      - { label: "To'garak tavsifi va dasturi", name: "body", widget: "markdown" }
+      - { label: "Belgi (Badge)", name: "badge", widget: "string", default: "Ommabop" }
+
+  # 2. YANGILIKLAR VA MAQOLALAR TASMASI (NEWS & ARTICLES)
+  - name: "yangiliklar"
+    label: "Yangiliklar va Maqolalar"
+    label_singular: "Yangilik"
+    folder: "content/yangiliklar"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Maqola sarlavhasi", name: "title", widget: "string" }
+      - { label: "Chop etilgan sana", name: "date", widget: "datetime" }
+      - { label: "Kategoriya", name: "category", widget: "select", options: ["Yutuqlarimiz", "Maktab hayoti", "Tadbirlar", "E'lonlar", "Ta'lim"] }
+      - { label: "Muallif / Mas'ul", name: "author", widget: "string", default: "Direktor o'rinbosari" }
+      - { label: "Asosiy rasm", name: "image", widget: "image" }
+      - { label: "Qisqacha mazmuni", name: "excerpt", widget: "text" }
+      - { label: "To'liq maqola matni", name: "body", widget: "markdown" }
+      - { label: "Muhim yangilik (Asosiy sahifada ko'rsatish)", name: "featured", widget: "boolean", default: false }
+
+  # 3. ELEKTRON KUTUBXONA (GOOGLE DRIVE PDF)
+  - name: "kutubxona"
+    label: "Elektron Kutubxona (PDF)"
+    label_singular: "Kitob"
+    folder: "content/kutubxona"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Kitob / Darslik nomi", name: "title", widget: "string" }
+      - { label: "Fan", name: "subject", widget: "string" }
+      - { label: "Sinf", name: "grade", widget: "number", value_type: "int", min: 1, max: 11 }
+      - { label: "Muallif(lar)", name: "author", widget: "string" }
+      - { label: "Chop etilgan yili", name: "year", widget: "number", value_type: "int" }
+      - { label: "Google Drive PDF Havolasi", name: "driveUrl", widget: "string", hint: "Google Drive 'Hamma ko'ra oladi' havolasi" }
+      - { label: "Fayl hajmi", name: "fileSize", widget: "string", default: "15 MB" }
+      - { label: "Sahifalar soni", name: "pages", widget: "number", value_type: "int" }
+      - { label: "Kitob muqovasi rasmi", name: "cover", widget: "image", required: false }
+      - { label: "Qisqacha tavsif", name: "description", widget: "text" }
+
+  # 4. DARS JADVALI (1- VA 2-SMENA)
+  - name: "jadval"
+    label: "Dars Jadvali"
+    label_singular: "Sinf jadvali"
+    folder: "content/jadval"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Sinf nomi", name: "className", widget: "string", hint: "Masalan: 10-A, 9-B" }
+      - { label: "Smena", name: "shift", widget: "select", options: ["1-Smena (Ertalabki)", "2-Smena (Tushdan keyingi)"] }
+      - { label: "Sinf rahbari", name: "classMaster", widget: "string" }
+      - label: "Haftalik darslar"
+        name: "days"
+        widget: "list"
+        fields:
+          - { label: "Hafta kuni", name: "dayName", widget: "select", options: ["Dushanba", "Seshanba", "Chorshanba", "Payshanba", "Juma", "Shanba"] }
+          - label: "Darslar ro'yxati"
+            name: "lessons"
+            widget: "list"
+            fields:
+              - { label: "Soat", name: "lessonNumber", widget: "number", value_type: "int" }
+              - { label: "Vaqti", name: "time", widget: "string" }
+              - { label: "Fan", name: "subject", widget: "string" }
+              - { label: "O'qituvchi", name: "teacher", widget: "string" }
+              - { label: "Xona", name: "room", widget: "string" }
+
+  # 5. O'QUVCHILAR TOP-10 REYTINGI
+  - name: "reyting"
+    label: "O'quvchilar Reytingi"
+    label_singular: "Reyting a'zosi"
+    folder: "content/reyting"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "O'quvchi ismi-sharifi", name: "name", widget: "string" }
+      - { label: "Sinf", name: "grade", widget: "string" }
+      - { label: "O'rni (Reyting)", name: "rank", widget: "number", value_type: "int", min: 1, max: 100 }
+      - { label: "To'plagan balli", name: "score", widget: "number", value_type: "int" }
+      - { label: "Nishon/Unvon", name: "badge", widget: "string", default: "Oltin nishon" }
+      - { label: "Yutuq yo'nalishi", name: "category", widget: "string" }
+      - { label: "Chorak / O'quv yili", name: "quarter", widget: "string", default: "1-chorak" }
+
+  # 6. O'QITUVCHILAR (PEDAGOGLAR TARKIBI)
+  - name: "oqituvchilar"
+    label: "O'qituvchilar tarkibi"
+    label_singular: "O'qituvchi"
+    folder: "content/oqituvchilar"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "F.I.SH", name: "name", widget: "string" }
+      - { label: "Mutaxassislik fani", name: "subject", widget: "string" }
+      - { label: "Toifasi / Unvoni", name: "rank", widget: "string" }
+      - { label: "Pedagogik staji (yil)", name: "experience", widget: "number", value_type: "int" }
+      - { label: "Surati", name: "photo", widget: "image" }
+      - { label: "Erishgan yutuqlari va mukofotlari", name: "achievements", widget: "string" }
+
+  # 7. SAYT SOZLAMALARI VA ALOQA (BOSH EGA BOSHQARUVI)
+  - name: "sozlamalar"
+    label: "Sayt va Maktab Sozlamalari"
+    files:
+      - label: "Maktab bosh ma'lumotlari"
+        name: "maktab_info"
+        file: "content/settings/general.json"
+        fields:
+          - { label: "Maktab to'liq nomi", name: "school_name", widget: "string", default: "Pastdarg'om tumani 65-sonli umumta'lim maktabi" }
+          - { label: "Shior", name: "motto", widget: "string", default: "Kelajak bunyodkorlari tarbiya topadigan maskan" }
+          - { label: "Maktab manzili", name: "address", widget: "string", default: "Samarqand viloyati, Pastdarg'om tumani, Maktab ko'chasi 65-uy" }
+          - { label: "Ekranda ko'rinuvchi rasmiy pochta", name: "display_email", widget: "string", default: "65maktab.uz@gmail.com" }
+          - { label: "Maktublar boruvchi haqiqiy pochta (mailto)", name: "actual_email", widget: "string", default: "y.u.umarxon2010@gmail.com" }
+          - { label: "Rasmiy telefon", name: "phone", widget: "string", default: "+998 77 293 64 88" }
+          - { label: "Telegram Bot havolasi (Murojaat va Support)", name: "telegram_bot", widget: "string", default: "http://t.me/pastdargom_65maktab_uzbot" }
+          - { label: "Ish vaqti", name: "working_hours", widget: "string", default: "Dushanba - Shanba: 08:00 - 18:00" }

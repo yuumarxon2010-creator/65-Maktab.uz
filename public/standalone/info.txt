@@ -1,0 +1,2 @@
+// Auto-generated export
+export const STANDALONE_READY = true;

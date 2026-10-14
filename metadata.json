@@ -1,0 +1,6 @@
+{
+  "name": "Pastdarg'om tumani 65-sonli Maktab",
+  "description": "Pastdarg'om tumani 65-sonli umumta'lim maktabi rasmiy veb-sayti. 65-MaktabAI multimodal yordamchi, to'garaklar, yangiliklar, dars jadvali, reyting, kutubxona va jamoaviy chat.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
