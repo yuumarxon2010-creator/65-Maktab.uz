@@ -12,22 +12,18 @@ import {
   Cpu, 
   Menu, 
   X, 
-  Download, 
   Send, 
   Bot, 
   Sparkles, 
   Search, 
-  ExternalLink, 
-  Copy, 
-  Check, 
-  Code2, 
-  Layers, 
+  ChevronRight, 
   MessageSquare, 
   Image as ImageIcon, 
   Paperclip, 
   Heart,
-  ChevronRight,
-  ShieldAlert,
+  Lock,
+  Unlock,
+  ShieldCheck,
   Flame
 } from 'lucide-react';
 
@@ -44,19 +40,10 @@ import {
   TOP_STUDENTS, 
   TOP_CLASSES, 
   LIBRARY_BOOKS,
-  Club,
   NewsArticle,
   CommunityMessage,
   LibraryBook
 } from './data/schoolData.ts';
-
-import { 
-  STANDALONE_HTML, 
-  STANDALONE_CSS, 
-  STANDALONE_JS, 
-  ADMIN_CONFIG_YML, 
-  ADMIN_HTML 
-} from './data/sourceCode.ts';
 
 export default function App() {
   // Navigation & UI States
@@ -65,6 +52,12 @@ export default function App() {
   const [selectedClass, setSelectedClass] = useState<string>('9-A');
   const [ratingTab, setRatingTab] = useState<'students' | 'classes'>('students');
 
+  // Admin Password Modal States
+  const [adminModalOpen, setAdminModalOpen] = useState(false);
+  const [adminPin, setAdminPin] = useState('');
+  const [adminError, setAdminError] = useState(false);
+  const CORRECT_ADMIN_PIN = '6565'; // Istalgan parolni shu yerga yozishingiz mumkin
+
   // Library search and filter
   const [bookSearch, setBookSearch] = useState('');
   const [selectedGrade, setSelectedGrade] = useState<number | 'all'>('all');
@@ -72,11 +65,6 @@ export default function App() {
 
   // News article modal
   const [readingArticle, setReadingArticle] = useState<NewsArticle | null>(null);
-
-  // Code Export Modal
-  const [codeModalOpen, setCodeModalOpen] = useState(false);
-  const [activeCodeTab, setActiveCodeTab] = useState<'html' | 'css' | 'js' | 'admin_html' | 'admin_yml'>('html');
-  const [copiedCode, setCopiedCode] = useState(false);
 
   // Community Chat Modal & Messages
   const [communityModalOpen, setCommunityModalOpen] = useState(false);
@@ -89,7 +77,7 @@ export default function App() {
     }
   });
   const [newCommunityText, setNewCommunityText] = useState('');
-  const [communityAuthor, setCommunityAuthor] = useState('Iqtidorli O\'quvchi');
+  const [communityAuthor, setCommunityAuthor] = useState("Iqtidorli O'quvchi");
   const [communityGrade, setCommunityGrade] = useState('10-A');
 
   // 65-MaktabAI Chat State (Multimodal + Image Generation)
@@ -148,6 +136,19 @@ export default function App() {
     });
   }, [bookSearch, selectedGrade]);
 
+  // Handle Admin Login Check
+  const handleAdminLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (adminPin === CORRECT_ADMIN_PIN) {
+      setAdminError(false);
+      setAdminPin('');
+      setAdminModalOpen(false);
+      window.open('/admin/index.html', '_blank');
+    } else {
+      setAdminError(true);
+    }
+  };
+
   // Handle Image attachment for AI Vision
   const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -187,11 +188,9 @@ export default function App() {
     const currentImgMime = attachedImageMime;
     const currentImgPreview = attachedImagePreview;
 
-    // Reset inputs
     setAiInput('');
     removeAttachedImage();
 
-    // Append user message
     const userMsgId = Date.now().toString();
     setAiMessages(prev => [
       ...prev,
@@ -206,7 +205,6 @@ export default function App() {
 
     setAiLoading(true);
 
-    // Check if it's an image generation request
     const isImageRequest = promptToSend.toLowerCase().startsWith('menga rasmini chizib ber:') || 
                            promptToSend.toLowerCase().includes('rasm chizib ber') || 
                            promptToSend.toLowerCase().startsWith('/image ');
@@ -247,7 +245,6 @@ export default function App() {
           ]);
         }
       } else {
-        // Standard or Multimodal Vision request
         const historyPayload = aiMessages.slice(-6).map(m => ({
           role: m.role,
           text: m.text
@@ -295,13 +292,13 @@ export default function App() {
           ]);
         }
       }
-    } catch (err: any) {
+    } catch {
       setAiMessages(prev => [
         ...prev,
         {
           id: (Date.now() + 1).toString(),
           role: 'model',
-          text: "Pastdarg'om tumani 65-sonli maktab serveriga ulanishda texnik uzilish. Iltimos, Telegram botimiz orqali ham bog'lanishingiz mumkin: @pastdargom_65maktab_uzbot",
+          text: "Pastdarg'om tumani 65-sonli maktab serveriga ulanishda texnik uzilish. Telegram botimiz orqali ham bog'lanishingiz mumkin.",
           time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         }
       ]);
@@ -334,7 +331,6 @@ export default function App() {
     setNewCommunityText('');
   };
 
-  // Like community message
   const handleLikeCommunityMessage = (id: string) => {
     const updated = communityMessages.map(m => {
       if (m.id === id) {
@@ -348,7 +344,6 @@ export default function App() {
     } catch {}
   };
 
-  // Contact form submission -> Redirect to Telegram Bot
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!contactName || !contactPhone || !contactMessage) {
@@ -367,48 +362,10 @@ export default function App() {
     setContactMessage('');
   };
 
-  // Copy code helper
-  const handleCopyCode = (content: string) => {
-    navigator.clipboard.writeText(content).then(() => {
-      setCopiedCode(true);
-      setTimeout(() => setCopiedCode(false), 2000);
-    });
-  };
-
-  // Download file helper
-  const handleDownloadCode = (key: string) => {
-    const fileNames: Record<string, string> = {
-      html: 'index.html',
-      css: 'style.css',
-      js: 'script.js',
-      admin_html: 'admin_index.html',
-      admin_yml: 'admin_config.yml'
-    };
-    const contents: Record<string, string> = {
-      html: STANDALONE_HTML,
-      css: STANDALONE_CSS,
-      js: STANDALONE_JS,
-      admin_html: ADMIN_HTML,
-      admin_yml: ADMIN_CONFIG_YML
-    };
-
-    const filename = fileNames[key] || 'school_code.txt';
-    const content = contents[key] || '';
-    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    a.click();
-    URL.revokeObjectURL(url);
-  };
-
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-amber-500 selection:text-white">
       
-      {/* --------------------------------------------------------------------- */}
-      {/* TOP ANNOUNCEMENT BAR                                                  */}
-      {/* --------------------------------------------------------------------- */}
+      {/* TOP ANNOUNCEMENT BAR */}
       <aside className="bg-slate-950 text-slate-300 text-xs py-2 px-4 border-b border-white/10">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
           <div className="flex items-center gap-2 font-medium">
@@ -416,21 +373,11 @@ export default function App() {
             <span>Yangi o'quv choragi: To'garaklar va "65-MaktabAI" multimodal yordamchisi faol ishlamoqda!</span>
           </div>
           <div className="flex items-center gap-4 text-xs font-semibold">
-            {/* Exact display email with actual mailto */}
-            <a 
-              href={`mailto:${SCHOOL_INFO.actualEmail}`} 
-              className="hover:text-amber-400 transition-colors flex items-center gap-1.5"
-              title="Maktub yo'llash"
-            >
+            <a href={`mailto:${SCHOOL_INFO.actualEmail}`} className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
               <Mail className="w-3.5 h-3.5 text-amber-400" />
               <span>{SCHOOL_INFO.displayEmail}</span>
             </a>
-            {/* Exact phone number */}
-            <a 
-              href={`tel:${SCHOOL_INFO.phoneRaw}`} 
-              className="hover:text-amber-400 transition-colors flex items-center gap-1.5"
-              title="Qo'ng'iroq qilish"
-            >
+            <a href={`tel:${SCHOOL_INFO.phoneRaw}`} className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
               <Phone className="w-3.5 h-3.5 text-amber-400" />
               <span>{SCHOOL_INFO.phoneDisplay}</span>
             </a>
@@ -438,13 +385,10 @@ export default function App() {
         </div>
       </aside>
 
-      {/* --------------------------------------------------------------------- */}
-      {/* MAIN HEADER & NAVIGATION                                              */}
-      {/* --------------------------------------------------------------------- */}
+      {/* MAIN HEADER & NAVIGATION (Kodlarni olish olib tashlandi, Admin parolli qilindi) */}
       <header className="sticky top-0 z-40 bg-[#0b1b3d]/95 backdrop-blur-md border-b border-white/10 text-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-18 flex items-center justify-between">
           
-          {/* Brand Logo */}
           <a href="#hero" className="flex items-center gap-3 group">
             <div className="w-11 h-12 relative flex items-center justify-center">
               <svg viewBox="0 0 36 40" fill="none" className="w-full h-full drop-shadow">
@@ -460,7 +404,6 @@ export default function App() {
             </div>
           </a>
 
-          {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-1 font-semibold text-sm">
             <a href="#hero" className="px-3 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-white/10 transition-colors">Bosh sahifa</a>
             <a href="#about" className="px-3 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-white/10 transition-colors">Haqida</a>
@@ -472,9 +415,7 @@ export default function App() {
             <a href="#contact" className="px-3 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-white/10 transition-colors">Aloqa</a>
           </nav>
 
-          {/* Actions: Community Chat, Admin, Code Viewer, Mobile Menu */}
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* Community Chat Button */}
             <button
               onClick={() => setCommunityModalOpen(true)}
               className="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs sm:text-sm font-bold bg-amber-500/15 text-amber-400 border border-amber-500/30 hover:bg-amber-500/25 transition-all"
@@ -483,29 +424,16 @@ export default function App() {
               <span>Jamoaviy Chat</span>
             </button>
 
-            {/* Admin Decap CMS link */}
-            <a 
-              href="/admin/index.html" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/10 hover:bg-white/20 text-slate-200 hover:text-white transition-all border border-white/10"
-              title="Decap CMS boshqaruv paneli"
+            {/* Parolli Admin Panel tugmasi */}
+            <button 
+              onClick={() => setAdminModalOpen(true)}
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-white/10 hover:bg-white/20 text-slate-200 hover:text-white transition-all border border-white/10 shadow"
+              title="Admin panelga kirish (Parol talab qilinadi)"
             >
-              <Users className="w-4 h-4" />
-              <span className="hidden md:inline">Admin Panel</span>
-            </a>
-
-            {/* Code Viewer Modal Trigger */}
-            <button
-              onClick={() => setCodeModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-bold bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-white shadow-md transition-all"
-              title="HTML, CSS, JS va Admin kodlari"
-            >
-              <Code2 className="w-4 h-4" />
-              <span className="hidden md:inline">Kodlarni olish</span>
+              <Lock className="w-4 h-4 text-amber-400" />
+              <span>Admin Panel</span>
             </button>
 
-            {/* Hamburger button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="lg:hidden p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white"
@@ -516,16 +444,15 @@ export default function App() {
           </div>
         </div>
 
-        {/* Mobile menu dropdown */}
         {mobileMenuOpen && (
           <div className="lg:hidden bg-slate-900 border-t border-white/10 px-4 py-4 space-y-2">
             <a href="#hero" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 rounded-lg text-slate-200 hover:bg-white/10">Bosh sahifa</a>
             <a href="#about" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 rounded-lg text-slate-200 hover:bg-white/10">Maktab haqida</a>
             <a href="#clubs" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 rounded-lg text-slate-200 hover:bg-white/10">To'garaklar ro'yxati</a>
             <a href="#news" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 rounded-lg text-slate-200 hover:bg-white/10">Yangiliklar va Maqolalar</a>
-            <a href="#schedule" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 rounded-lg text-slate-200 hover:bg-white/10">Dars jadvali (1 & 2-smena)</a>
+            <a href="#schedule" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 rounded-lg text-slate-200 hover:bg-white/10">Dars jadvali</a>
             <a href="#rating" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 rounded-lg text-slate-200 hover:bg-white/10">O'quvchilar Reytingi</a>
-            <a href="#library" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 rounded-lg text-slate-200 hover:bg-white/10">Elektron Kutubxona (PDF)</a>
+            <a href="#library" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 rounded-lg text-slate-200 hover:bg-white/10">Elektron Kutubxona</a>
             <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 rounded-lg text-slate-200 hover:bg-white/10">Aloqa va Joylashuv</a>
             <button
               onClick={() => { setMobileMenuOpen(false); setCommunityModalOpen(true); }}
@@ -537,9 +464,7 @@ export default function App() {
         )}
       </header>
 
-      {/* --------------------------------------------------------------------- */}
-      {/* 1. HERO SECTION                                                       */}
-      {/* --------------------------------------------------------------------- */}
+      {/* 1. HERO SECTION */}
       <section id="hero" className="relative bg-gradient-to-br from-[#071228] via-[#0b1b3d] to-[#152d5b] text-white py-20 lg:py-28 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-500/15 via-transparent to-transparent pointer-events-none"></div>
         
@@ -572,7 +497,6 @@ export default function App() {
             </a>
           </div>
 
-          {/* Stats Bar */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl shadow-xl">
             <div className="p-3">
               <div className="text-3xl sm:text-4xl font-black text-amber-400 mb-1">{SCHOOL_INFO.stats.students}</div>
@@ -594,9 +518,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* --------------------------------------------------------------------- */}
-      {/* 2. MAKTAB HAQIDA (ABOUT)                                              */}
-      {/* --------------------------------------------------------------------- */}
+      {/* 2. MAKTAB HAQIDA (ABOUT) */}
       <section id="about" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-3xl mx-auto mb-14">
@@ -651,9 +573,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* --------------------------------------------------------------------- */}
-      {/* 3. TO'GARAKLAR RO'YXATI (CLUBS SECTION - NEW)                          */}
-      {/* --------------------------------------------------------------------- */}
+      {/* 3. TO'GARAKLAR RO'YXATI */}
       <section id="clubs" className="py-20 bg-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-3xl mx-auto mb-14">
@@ -715,27 +635,10 @@ export default function App() {
               </div>
             ))}
           </div>
-
-          <div className="bg-gradient-to-r from-[#0b1b3d] to-[#1e3a8a] text-white p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
-            <div>
-              <h4 className="text-lg font-bold mb-1">Yangi to'garak ochish yoki taklif kiritmoqchimisiz?</h4>
-              <p className="text-slate-300 text-sm">Maktabimiz Telegram bot orqali istalgan taklif va arizalaringizni qoldirishingiz mumkin.</p>
-            </div>
-            <a 
-              href={SCHOOL_INFO.telegramBotUrl} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="px-5 py-3 rounded-xl font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 text-sm whitespace-nowrap shadow transition-all"
-            >
-              Telegram Botga yozish
-            </a>
-          </div>
         </div>
       </section>
 
-      {/* --------------------------------------------------------------------- */}
-      {/* 4. YANGILIKLAR VA MAQOLALAR TASMASI (NEWS & ARTICLES)                 */}
-      {/* --------------------------------------------------------------------- */}
+      {/* 4. YANGILIKLAR VA MAQOLALAR */}
       <section id="news" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-3xl mx-auto mb-14">
@@ -781,9 +684,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* --------------------------------------------------------------------- */}
-      {/* 5. DARS JADVALI (SCHEDULE SECTION)                                    */}
-      {/* --------------------------------------------------------------------- */}
+      {/* 5. DARS JADVALI */}
       <section id="schedule" className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-3xl mx-auto mb-14">
@@ -794,7 +695,6 @@ export default function App() {
             </p>
           </div>
 
-          {/* Shift tabs */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto mb-8">
             {SHIFTS.map(shift => (
               <button
@@ -819,7 +719,6 @@ export default function App() {
             ))}
           </div>
 
-          {/* Bells timetable preview */}
           <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm mb-8">
             <div className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-4 flex items-center gap-2">
               <Clock className="w-4 h-4 text-amber-500" />
@@ -836,7 +735,6 @@ export default function App() {
             </div>
           </div>
 
-          {/* Class Select Controls */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
             <div className="flex items-center gap-3">
               <label htmlFor="classSelector" className="text-sm font-bold text-slate-900">Sinfni tanlang:</label>
@@ -852,13 +750,8 @@ export default function App() {
                 <option value="6-B">6-"B" sinf (2-smena)</option>
               </select>
             </div>
-            <div className="text-xs text-slate-500 flex items-center gap-1.5">
-              <Calendar className="w-4 h-4 text-amber-500" />
-              <span>Har bir dars davomiyligi 45 daqiqadan iborat.</span>
-            </div>
           </div>
 
-          {/* Table */}
           <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
@@ -894,9 +787,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* --------------------------------------------------------------------- */}
-      {/* 6. O'QUVCHILAR REYTINGI (TOP-10 RANKINGS)                             */}
-      {/* --------------------------------------------------------------------- */}
+      {/* 6. O'QUVCHILAR REYTINGI */}
       <section id="rating" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-3xl mx-auto mb-12">
@@ -1000,9 +891,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* --------------------------------------------------------------------- */}
-      {/* 7. O'QITUVCHILAR BO'LIMI (TEACHERS)                                    */}
-      {/* --------------------------------------------------------------------- */}
+      {/* 7. O'QITUVCHILAR */}
       <section id="teachers" className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-3xl mx-auto mb-14">
@@ -1033,9 +922,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* --------------------------------------------------------------------- */}
-      {/* 8. ELEKTRON KUTUBXONA (GOOGLE DRIVE PDF)                               */}
-      {/* --------------------------------------------------------------------- */}
+      {/* 8. KUTUBXONA */}
       <section id="library" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-3xl mx-auto mb-14">
@@ -1046,7 +933,6 @@ export default function App() {
             </p>
           </div>
 
-          {/* Search & Filter */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-10 max-w-4xl mx-auto">
             <div className="relative w-full md:w-80">
               <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -1086,7 +972,6 @@ export default function App() {
             </div>
           </div>
 
-          {/* Books Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredBooks.map(book => (
               <div key={book.id} className="bg-slate-50 rounded-2xl border border-slate-200 p-6 flex flex-col justify-between hover:shadow-lg transition-all">
@@ -1115,7 +1000,6 @@ export default function App() {
                     rel="noopener noreferrer"
                     className="flex-1 py-2 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 flex items-center justify-center gap-1.5 transition-colors shadow-sm"
                   >
-                    <Download className="w-3.5 h-3.5" />
                     <span>PDF Yuklab olish</span>
                   </a>
                 </div>
@@ -1125,9 +1009,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* --------------------------------------------------------------------- */}
-      {/* 9. ALOQA VA JOYLASHUV (CONTACT SECTION)                               */}
-      {/* --------------------------------------------------------------------- */}
+      {/* 9. ALOQA */}
       <section id="contact" className="py-20 bg-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-3xl mx-auto mb-14">
@@ -1139,7 +1021,6 @@ export default function App() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Info Card */}
             <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
               <div>
                 <h3 className="text-xl font-bold text-[#0b1b3d] mb-2">Maktab Rekvizitlari</h3>
@@ -1176,50 +1057,15 @@ export default function App() {
                     </div>
                     <div>
                       <div className="text-xs font-bold text-slate-400 uppercase">Rasmiy Pochta:</div>
-                      {/* Exact Display email vs Mailto */}
-                      <a 
-                        href={`mailto:${SCHOOL_INFO.actualEmail}`} 
-                        className="font-semibold text-slate-900 hover:text-amber-600 mt-0.5 block"
-                        title="Pochta orqali yozish"
-                      >
+                      <a href={`mailto:${SCHOOL_INFO.actualEmail}`} className="font-semibold text-slate-900 hover:text-amber-600 mt-0.5 block">
                         {SCHOOL_INFO.displayEmail}
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3.5">
-                    <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center flex-shrink-0">
-                      <Send className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <div className="text-xs font-bold text-slate-400 uppercase">Telegram Support Bot:</div>
-                      <a 
-                        href={SCHOOL_INFO.telegramBotUrl} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="font-semibold text-blue-600 hover:underline mt-0.5 block"
-                      >
-                        @pastdargom_65maktab_uzbot
                       </a>
                     </div>
                   </div>
                 </div>
               </div>
-
-              <div className="mt-8 pt-6 border-t border-slate-100">
-                <a
-                  href={SCHOOL_INFO.telegramBotUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-3 rounded-xl font-bold bg-amber-500 hover:bg-amber-400 text-slate-950 flex items-center justify-center gap-2 text-sm shadow transition-all"
-                >
-                  <Send className="w-4 h-4" />
-                  <span>Telegram Support Botga o'tish</span>
-                </a>
-              </div>
             </div>
 
-            {/* Form Card (Redirects to Telegram Bot) */}
             <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
               <h3 className="text-xl font-bold text-[#0b1b3d] mb-2">Murojaat va Taklif Qoldirish</h3>
               <p className="text-slate-600 text-sm mb-6 leading-relaxed">
@@ -1292,9 +1138,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* --------------------------------------------------------------------- */}
-      {/* FOOTER                                                                */}
-      {/* --------------------------------------------------------------------- */}
+      {/* FOOTER */}
       <footer className="bg-[#071228] text-slate-400 py-12 border-t border-white/10 text-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
@@ -1324,7 +1168,7 @@ export default function App() {
                 <li><a href="#news" className="hover:text-amber-400">Yangiliklar va Maqolalar</a></li>
                 <li><a href="#schedule" className="hover:text-amber-400">Dars jadvali</a></li>
                 <li><a href="#rating" className="hover:text-amber-400">TOP-10 Reyting</a></li>
-                <li><a href="#library" className="hover:text-amber-400">Kutubxona (Google Drive)</a></li>
+                <li><a href="#library" className="hover:text-amber-400">Kutubxona</a></li>
               </ul>
             </div>
 
@@ -1332,23 +1176,14 @@ export default function App() {
               <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-4">Boshqaruv & Texnik</h4>
               <ul className="space-y-2 text-xs">
                 <li>
-                  <a href="/admin/index.html" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400">
-                    Decap CMS Admin Panel
-                  </a>
-                </li>
-                <li>
-                  <button onClick={() => setCodeModalOpen(true)} className="text-amber-400 hover:underline">
-                    Sayt Manba Kodlari (HTML, CSS, JS)
+                  <button onClick={() => setAdminModalOpen(true)} className="text-amber-400 hover:underline flex items-center gap-1">
+                    <Lock className="w-3 h-3" />
+                    <span>Admin Panelga Kirish</span>
                   </button>
                 </li>
                 <li>
                   <a href={SCHOOL_INFO.telegramBotUrl} target="_blank" rel="noopener noreferrer" className="hover:text-amber-400">
                     Telegram Support Bot
-                  </a>
-                </li>
-                <li>
-                  <a href={`mailto:${SCHOOL_INFO.actualEmail}`} className="hover:text-amber-400">
-                    {SCHOOL_INFO.displayEmail}
                   </a>
                 </li>
               </ul>
@@ -1365,9 +1200,7 @@ export default function App() {
         </div>
       </footer>
 
-      {/* --------------------------------------------------------------------- */}
-      {/* FLOATING "65-MAKTABAI" BUTTON (MULTIMODAL & IMAGE GENERATION)         */}
-      {/* --------------------------------------------------------------------- */}
+      {/* FLOATING AI BUTTON */}
       <div className="fixed bottom-6 right-6 z-50">
         <button
           onClick={() => setAiModalOpen(true)}
@@ -1380,14 +1213,61 @@ export default function App() {
         </button>
       </div>
 
-      {/* --------------------------------------------------------------------- */}
-      {/* 65-MAKTABAI CHAT MODAL                                                */}
-      {/* --------------------------------------------------------------------- */}
+      {/* ADMIN PASSWORD MODAL (PIN-KOD SO'RASH OYNASI) */}
+      {adminModalOpen && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white w-full max-w-sm rounded-3xl shadow-2xl p-6 border border-slate-200">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2 text-[#0b1b3d] font-extrabold text-base">
+                <Lock className="w-5 h-5 text-amber-500" />
+                <span>Admin Panel Himoyasi</span>
+              </div>
+              <button
+                onClick={() => { setAdminModalOpen(false); setAdminPin(''); setAdminError(false); }}
+                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <p className="text-xs text-slate-600 mb-4 leading-relaxed">
+              Admin panelga kirish uchun maxfiy PIN-kodni kiriting (Standart parol: <b>6565</b>):
+            </p>
+
+            <form onSubmit={handleAdminLogin} className="space-y-4">
+              <div>
+                <input
+                  type="password"
+                  maxLength={6}
+                  placeholder="PIN-kodni kiriting..."
+                  value={adminPin}
+                  onChange={(e) => setAdminPin(e.target.value)}
+                  autoFocus
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-center text-lg font-bold tracking-widest outline-none focus:border-amber-500 shadow-inner"
+                />
+                {adminError && (
+                  <div className="text-xs text-rose-600 font-bold mt-1.5 text-center">
+                    ❌ Noto'g'ri parol! Qaytadan urinib ko'ring.
+                  </div>
+                )}
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-3 rounded-xl font-bold bg-[#0b1b3d] hover:bg-[#162f65] text-white flex items-center justify-center gap-2 text-sm shadow transition-all"
+              >
+                <ShieldCheck className="w-4 h-4 text-amber-400" />
+                <span>Tasdiqlash va Kirish</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* 65-MAKTABAI CHAT MODAL */}
       {aiModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-white w-full max-w-lg h-[640px] max-h-[92vh] rounded-3xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden">
-            
-            {/* Header */}
             <div className="bg-[#0b1b3d] text-white p-4 px-5 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-full bg-amber-500/20 border border-amber-400 flex items-center justify-center text-amber-400">
@@ -1395,10 +1275,7 @@ export default function App() {
                 </div>
                 <div>
                   <div className="font-extrabold text-sm">65-MaktabAI</div>
-                  <div className="text-[10px] text-slate-300 flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                    <span>Multimodal O'qituvchi & Tasvir Yaratuvchi</span>
-                  </div>
+                  <div className="text-[10px] text-slate-300">Multimodal O'qituvchi</div>
                 </div>
               </div>
               <button
@@ -1409,35 +1286,6 @@ export default function App() {
               </button>
             </div>
 
-            {/* Quick Chips */}
-            <div className="flex items-center gap-1.5 p-2 px-3 bg-slate-50 border-b border-slate-200 overflow-x-auto text-xs whitespace-nowrap">
-              <button
-                onClick={() => handleSendAiMessage(undefined, "Matematika: 10-sinf kvadrat tenglamalarni yechish formulasi va misollarini tushuntirib bering.")}
-                className="px-2.5 py-1 rounded-full bg-white border border-slate-200 text-slate-700 hover:border-amber-500 font-semibold"
-              >
-                📐 Matematika
-              </button>
-              <button
-                onClick={() => handleSendAiMessage(undefined, "Menga rasmini chizib ber: Quyosh tizimi, yulduzlar va zamonaviy kosmik stansiya")}
-                className="px-2.5 py-1 rounded-full bg-amber-50 border border-amber-300 text-amber-800 font-semibold"
-              >
-                🎨 Rasm chizish
-              </button>
-              <button
-                onClick={() => handleSendAiMessage(undefined, "Ingliz tili: 'Present Perfect' zamonini o'zbek tilida 3 ta misol bilan tushuntir.")}
-                className="px-2.5 py-1 rounded-full bg-white border border-slate-200 text-slate-700 hover:border-amber-500 font-semibold"
-              >
-                🇬🇧 Ingliz tili
-              </button>
-              <button
-                onClick={() => handleSendAiMessage(undefined, "Maktabimizdagi IT va Shaxmat to'garaklari jadvalini aytib bering.")}
-                className="px-2.5 py-1 rounded-full bg-white border border-slate-200 text-slate-700 hover:border-amber-500 font-semibold"
-              >
-                🏫 To'garaklar
-              </button>
-            </div>
-
-            {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
               {aiMessages.map(msg => (
                 <div
@@ -1476,12 +1324,11 @@ export default function App() {
               <div ref={aiChatEndRef} />
             </div>
 
-            {/* Image attachment preview strip */}
             {attachedImagePreview && (
               <div className="p-2 px-4 bg-amber-50 border-t border-amber-200 flex items-center justify-between text-xs text-amber-900">
                 <div className="flex items-center gap-2">
                   <img src={attachedImagePreview} alt="Tanlangan rasm" className="w-8 h-8 rounded object-cover border border-amber-300" />
-                  <span className="font-semibold">Rasm biriktirildi (Vision tahlili)</span>
+                  <span className="font-semibold">Rasm biriktirildi</span>
                 </div>
                 <button onClick={removeAttachedImage} className="text-rose-600 font-bold hover:underline">
                   Olib tashlash
@@ -1489,7 +1336,6 @@ export default function App() {
               </div>
             )}
 
-            {/* Input Bar */}
             <form onSubmit={handleSendAiMessage} className="p-3 bg-white border-t border-slate-200 flex items-center gap-2">
               <input
                 type="file"
@@ -1499,17 +1345,15 @@ export default function App() {
                 className="hidden"
               />
 
-              {/* Attach Image for Vision */}
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
                 className="p-2 text-slate-500 hover:text-amber-600 hover:bg-slate-100 rounded-full transition-colors"
-                title="Rasm biriktirish (Vision tahlili)"
+                title="Rasm biriktirish"
               >
                 <Paperclip className="w-5 h-5" />
               </button>
 
-              {/* Image gen trigger */}
               <button
                 type="button"
                 onClick={() => setAiInput("Menga rasmini chizib ber: ")}
@@ -1539,13 +1383,10 @@ export default function App() {
         </div>
       )}
 
-      {/* --------------------------------------------------------------------- */}
-      {/* O'QUVCHILAR UCHUN JAMOAVIY CHAT MODALI (COMMUNITY CHAT)               */}
-      {/* --------------------------------------------------------------------- */}
+      {/* COMMUNITY CHAT MODAL */}
       {communityModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-white w-full max-w-xl h-[680px] max-h-[92vh] rounded-3xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden">
-            {/* Header */}
             <div className="bg-[#0b1b3d] text-white p-4 px-5 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-full bg-blue-500/20 border border-blue-400 flex items-center justify-center text-amber-400">
@@ -1553,7 +1394,7 @@ export default function App() {
                 </div>
                 <div>
                   <div className="font-extrabold text-sm">65-Maktab O'quvchilari Jamoaviy Chati</div>
-                  <div className="text-[10px] text-slate-300">Do'stona fikr almashish va dars muhokamalari</div>
+                  <div className="text-[10px] text-slate-300">Do'stona fikr almashish</div>
                 </div>
               </div>
               <button
@@ -1564,7 +1405,6 @@ export default function App() {
               </button>
             </div>
 
-            {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
               {communityMessages.map(msg => (
                 <div key={msg.id} className="flex items-start gap-3">
@@ -1591,12 +1431,11 @@ export default function App() {
               <div ref={communityChatEndRef} />
             </div>
 
-            {/* Input form */}
             <form onSubmit={handleSendCommunityMessage} className="p-3 bg-white border-t border-slate-200 space-y-2">
               <div className="flex items-center gap-2">
                 <input
                   type="text"
-                  placeholder="Ismingiz (Masalan: Sardor)"
+                  placeholder="Ismingiz"
                   value={communityAuthor}
                   onChange={(e) => setCommunityAuthor(e.target.value)}
                   className="w-1/2 px-3 py-1.5 bg-slate-100 border border-slate-200 rounded-lg text-xs outline-none"
@@ -1610,8 +1449,6 @@ export default function App() {
                   <option value="10-A">10-A sinf</option>
                   <option value="10-B">10-B sinf</option>
                   <option value="11-A">11-A sinf</option>
-                  <option value="8-V">8-V sinf</option>
-                  <option value="7-A">7-A sinf</option>
                 </select>
               </div>
               <div className="flex items-center gap-2">
@@ -1634,9 +1471,7 @@ export default function App() {
         </div>
       )}
 
-      {/* --------------------------------------------------------------------- */}
-      {/* ARTICLE READER MODAL (YANGILIK O'QISH)                                */}
-      {/* --------------------------------------------------------------------- */}
+      {/* ARTICLE READER MODAL */}
       {readingArticle && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-white w-full max-w-2xl max-h-[85vh] rounded-3xl shadow-2xl p-6 sm:p-8 overflow-y-auto">
@@ -1674,9 +1509,7 @@ export default function App() {
         </div>
       )}
 
-      {/* --------------------------------------------------------------------- */}
-      {/* BOOK PREVIEW MODAL                                                    */}
-      {/* --------------------------------------------------------------------- */}
+      {/* BOOK PREVIEW MODAL */}
       {previewBook && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-white w-full max-w-md rounded-3xl shadow-2xl p-6">
@@ -1715,121 +1548,6 @@ export default function App() {
               >
                 PDF Yuklab olish
               </a>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* --------------------------------------------------------------------- */}
-      {/* CODE EXPORT MODAL (HTML, CSS, JS, ADMIN DECAP CMS)                    */}
-      {/* --------------------------------------------------------------------- */}
-      {codeModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-900 text-slate-100 w-full max-w-4xl h-[720px] max-h-[92vh] rounded-3xl shadow-2xl border border-white/10 flex flex-col overflow-hidden">
-            
-            {/* Modal header */}
-            <div className="p-4 px-6 bg-slate-950 border-b border-white/10 flex items-center justify-between">
-              <div className="flex items-center gap-2 font-bold text-sm text-amber-400">
-                <Code2 className="w-5 h-5" />
-                <span>Sayt Manba Kodlari (HTML, CSS, JS va Admin Decap CMS)</span>
-              </div>
-              <button
-                onClick={() => setCodeModalOpen(false)}
-                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* Tab buttons */}
-            <div className="flex items-center gap-2 p-2 px-6 bg-slate-800 border-b border-white/10 overflow-x-auto text-xs font-mono">
-              <button
-                onClick={() => setActiveCodeTab('html')}
-                className={`px-3 py-1.5 rounded-lg transition-colors ${
-                  activeCodeTab === 'html' ? 'bg-amber-500 text-slate-950 font-bold' : 'bg-white/5 text-slate-300 hover:bg-white/10'
-                }`}
-              >
-                index.html
-              </button>
-              <button
-                onClick={() => setActiveCodeTab('css')}
-                className={`px-3 py-1.5 rounded-lg transition-colors ${
-                  activeCodeTab === 'css' ? 'bg-amber-500 text-slate-950 font-bold' : 'bg-white/5 text-slate-300 hover:bg-white/10'
-                }`}
-              >
-                style.css
-              </button>
-              <button
-                onClick={() => setActiveCodeTab('js')}
-                className={`px-3 py-1.5 rounded-lg transition-colors ${
-                  activeCodeTab === 'js' ? 'bg-amber-500 text-slate-950 font-bold' : 'bg-white/5 text-slate-300 hover:bg-white/10'
-                }`}
-              >
-                script.js
-              </button>
-              <button
-                onClick={() => setActiveCodeTab('admin_html')}
-                className={`px-3 py-1.5 rounded-lg transition-colors ${
-                  activeCodeTab === 'admin_html' ? 'bg-amber-500 text-slate-950 font-bold' : 'bg-white/5 text-slate-300 hover:bg-white/10'
-                }`}
-              >
-                admin/index.html
-              </button>
-              <button
-                onClick={() => setActiveCodeTab('admin_yml')}
-                className={`px-3 py-1.5 rounded-lg transition-colors ${
-                  activeCodeTab === 'admin_yml' ? 'bg-amber-500 text-slate-950 font-bold' : 'bg-white/5 text-slate-300 hover:bg-white/10'
-                }`}
-              >
-                admin/config.yml
-              </button>
-            </div>
-
-            {/* Toolbar */}
-            <div className="p-3 px-6 bg-slate-900 border-b border-white/10 flex items-center justify-between text-xs">
-              <span className="text-slate-400 font-mono">
-                {activeCodeTab === 'html' && 'index.html (Asosiy sayt strukturasi va bo\'limlari)'}
-                {activeCodeTab === 'css' && 'style.css (Ranglar, animatsiyalar va to\'liq responsive stillar)'}
-                {activeCodeTab === 'js' && 'script.js (65-MaktabAI, jamoaviy chat va to\'garaklar mantiqi)'}
-                {activeCodeTab === 'admin_html' && 'admin/index.html (Decap CMS boshqaruv interfeysi)'}
-                {activeCodeTab === 'admin_yml' && 'admin/config.yml (Bosh Ega va Admin rollari sozlamalari)'}
-              </span>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => {
-                    const contents = {
-                      html: STANDALONE_HTML,
-                      css: STANDALONE_CSS,
-                      js: STANDALONE_JS,
-                      admin_html: ADMIN_HTML,
-                      admin_yml: ADMIN_CONFIG_YML
-                    };
-                    handleCopyCode(contents[activeCodeTab]);
-                  }}
-                  className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-semibold flex items-center gap-1.5 transition-colors"
-                >
-                  {copiedCode ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-amber-400" />}
-                  <span>{copiedCode ? "Nusxalandi! ✓" : "Nusxalash"}</span>
-                </button>
-                <button
-                  onClick={() => handleDownloadCode(activeCodeTab)}
-                  className="px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold flex items-center gap-1.5 transition-colors shadow"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  <span>Yuklab olish</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Editor box */}
-            <div className="flex-1 overflow-auto p-4 bg-slate-950 font-mono text-xs text-sky-300 leading-relaxed">
-              <pre className="whitespace-pre-wrap">
-                {activeCodeTab === 'html' && STANDALONE_HTML}
-                {activeCodeTab === 'css' && STANDALONE_CSS}
-                {activeCodeTab === 'js' && STANDALONE_JS}
-                {activeCodeTab === 'admin_html' && ADMIN_HTML}
-                {activeCodeTab === 'admin_yml' && ADMIN_CONFIG_YML}
-              </pre>
             </div>
           </div>
         </div>
