@@ -4,10 +4,9 @@
 # ==============================================================================
 
 backend:
-  name: git-gateway
+  name: github
+  repo: yuumarxon2010-creator/65-Maktab.uz
   branch: main
-
-local_backend: true
 
 media_folder: "public/uploads"
 public_folder: "/uploads"
