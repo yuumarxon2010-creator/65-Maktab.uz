@@ -143,7 +143,7 @@ export default function App() {
       setAdminError(false);
       setAdminPin('');
       setAdminModalOpen(false);
-      window.open('/admin/index.html', '_blank');
+      window.open('/65-Maktab.uz/admin/index.html', '_blank');
     } else {
       setAdminError(true);
     }
