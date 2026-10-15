@@ -7,6 +7,8 @@ backend:
   name: github
   repo: yuumarxon2010-creator/65-Maktab.uz
   branch: main
+  base_url: https://crimson-art-0f5b.y-u-umarxon2010.workers.dev
+  auth_endpoint: /auth
 
 media_folder: "public/uploads"
 public_folder: "/uploads"
