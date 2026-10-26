@@ -4,12 +4,8 @@
 # ==============================================================================
 
 backend:
-  name: github
-  repo: yuumarxon2010-creator/65-Maktab-uz
+  name: git-gateway
   branch: main
-  site_domain: yuumarxon2010-creator.github.io
-  base_url: https://decap-oauth-backend.vercel.app
-  auth_endpoint: /api/auth
 
 # Maktabdagi rasm va PDF fayllar saqlanadigan joy
 media_folder: "public/uploads"
