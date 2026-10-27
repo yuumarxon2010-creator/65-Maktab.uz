@@ -65,7 +65,7 @@
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   
   <script>
-    // Netlify Identity avto-yo'naltirish
+    // Netlify Identity initialization ken token handler
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {
         if (!user) {
@@ -74,6 +74,13 @@
           });
         }
       });
+
+      // No adda invite_token wenno recovery_token iti URL, lukatan ti widget a dagus
+      if (window.location.hash.includes('invite_token') || window.location.hash.includes('recovery_token')) {
+        window.netlifyIdentity.on('init', () => {
+          window.netlifyIdentity.open();
+        });
+      }
     }
   </script>
 </body>
