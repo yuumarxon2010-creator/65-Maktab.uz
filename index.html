@@ -1,22 +1,424 @@
-<!doctype html>
-<html lang="uz" class="scroll-smooth">
+<!DOCTYPE html>
+<html lang="uz">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>65-sonli Umumta'lim Maktabi — Rasmiy Veb-Sayti</title>
-    <meta name="google-site-verification" content="FOHhJ3zREAtnoVuH2m2sFiRrIeyLIGGj33UBN2vGSHM" />
-    <meta name="description" content="Umumta'lim maktabi uchun zamonaviy, responsive, dars jadvali, yutuqlar, elektron kutubxona va aloqa bo'limlariga ega rasmiy veb-sayt." />
-    <meta property="og:title" content="65-sonli Umumta'lim Maktabi" />
-    <meta property="og:description" content="Umumta'lim maktabi uchun zamonaviy, responsive, dars jadvali, yutuqlar, elektron kutubxona va aloqa bo'limlariga ega rasmiy veb-sayt." />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+    <title>Pastdarg'om tumani 65-sonli Umumta'lim Maktabi</title>
+    <meta
+      name="description"
+      content="Pastdarg'om tumani 65-sonli Umumta'lim Maktabi rasmiy veb-sayti"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #1d4ed8;
+        --primary-dark: #153dba;
+        --secondary: #0f172a;
+        --accent: #f59e0b;
+        --accent-soft: #fff3d6;
+        --success: #10b981;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --light: #f8fafc;
+        --white: #ffffff;
+        --border: rgba(15, 23, 42, 0.08);
+        --shadow: 0 20px 45px rgba(17, 24, 39, 0.12);
+        --radius: 20px;
+        --container: 1180px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: #f5f7fb;
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      .container {
+        width: min(var(--container), calc(100% - 2rem));
+        margin: 0 auto;
+      }
+
+      .section {
+        padding: 90px 0;
+      }
+
+      .section-heading {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .section-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(29, 78, 216, 0.08);
+        color: var(--primary);
+        padding: 8px 14px;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .section-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        line-height: 1.15;
+        margin-top: 16px;
+        color: var(--secondary);
+      }
+
+      .section-subtitle {
+        max-width: 720px;
+        margin: 18px auto 0;
+        color: var(--muted);
+        font-size: 1.03rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        border: none;
+        border-radius: 999px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.25s ease;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        color: var(--white);
+        padding: 16px 26px;
+        box-shadow: 0 15px 30px rgba(29, 78, 216, 0.28);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 36px rgba(29, 78, 216, 0.34);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        color: var(--white);
+        padding: 16px 26px;
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.18);
+      }
+
+      .topbar {
+        background: linear-gradient(90deg, #0b1f4d 0%, #122d6d 100%);
+        color: var(--white);
+        padding: 12px 0;
+        font-size: 0.92rem;
+      }
+
+      .topbar .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .topbar-info {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .topbar-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        opacity: 0.95;
+      }
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        background: var(--success);
+        border-radius: 50%;
+        box-shadow: 0 0 0 5px rgba(16, 185, 129, 0.18);
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-container {
+        width: min(var(--container), calc(100% - 2rem));
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 80px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-weight: 800;
+        color: var(--secondary);
+      }
+
+      .brand-mark {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, var(--primary) 0%, #60a5fa 100%);
+        display: grid;
+        place-items: center;
+        color: var(--white);
+        font-size: 1.3rem;
+        box-shadow: 0 12px 25px rgba(29, 78, 216, 0.22);
+      }
+
+      .brand-text {
+        font-size: 1rem;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+      }
+
+      .nav-links a {
+        color: #334155;
+        font-weight: 600;
+        transition: color 0.2s ease;
+        position: relative;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -8px;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        transition: width 0.25s ease;
+      }
+
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--primary);
+      }
+
+      .nav-links a:hover::after,
+      .nav-links a.active::after {
+        width: 100%;
+      }
+
+      .hero {
+        position: relative;
+        background:
+          linear-gradient(120deg, rgba(8, 15, 39, 0.86), rgba(15, 23, 42, 0.55)),
+          url("https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+        min-height: 760px;
+        display: grid;
+        place-items: center;
+      }
+
+      .hero-content {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        align-items: center;
+        gap: 48px;
+        padding: 80px 0 60px;
+      }
+
+      .hero-copy {
+        color: var(--white);
+        max-width: 620px;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 16px;
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.18);
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.6rem, 5vw, 5rem);
+        line-height: 1.07;
+        letter-spacing: -0.05em;
+        margin-bottom: 22px;
+      }
+
+      .hero p {
+        max-width: 560px;
+        color: rgba(255,255,255,0.8);
+        font-size: 1.08rem;
+      }
+
+      .hero-actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-top: 30px;
+      }
+
+      .teachers-grid, .classes-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+      }
+
+      .teacher-card, .class-card {
+        background: var(--white);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        overflow: hidden;
+        padding: 20px;
+      }
+
+      footer {
+        background: #081426;
+        color: rgba(255,255,255,0.8);
+        padding: 30px 0;
+        text-align: center;
+      }
+    </style>
   </head>
-  <body class="bg-slate-50 text-slate-800 antialiased selection:bg-amber-100 selection:text-slate-900 font-sans">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <body>
+    <div class="topbar">
+      <div class="container">
+        <div class="topbar-info">
+          <span class="topbar-item"><span class="dot"></span> Maktab rasmiy sayti</span>
+          <span class="topbar-item">📞 +998 71 200 00 00</span>
+          <span class="topbar-item">📍 Pastdarg'om tumani</span>
+        </div>
+      </div>
+    </div>
+
+    <header>
+      <div class="nav-container">
+        <a href="#home" class="brand">
+          <div class="brand-mark">A</div>
+          <div class="brand-text">65-sonli Umumta'lim Maktabi</div>
+        </a>
+        <nav class="nav-links">
+          <a href="#home">Bosh sahifa</a>
+          <a href="#about">Maktab haqida</a>
+          <a href="#teachers">O'qituvchilar</a>
+          <a href="#classes">Darslar</a>
+          <a href="#contact">Bog'lanish</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="container">
+          <div class="hero-content">
+            <div class="hero-copy">
+              <div class="hero-badge">Yosh avlod uchun eng yaxshi boshlang'ich</div>
+              <h1>Bilim, ma'rifat va kelajakka yo'l ochamiz.</h1>
+              <p>Pastdarg'om tumani 65-sonli Umumta'lim Maktabi rasmiy veb-sayti.</p>
+              <div class="hero-actions">
+                <a href="#about" class="btn btn-primary">Batafsil</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="container">
+          <div class="section-heading">
+            <span class="section-tag">Maktab haqida</span>
+            <h2 class="section-title">Bilim va ma'naviyat maskani</h2>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="teachers">
+        <div class="container">
+          <div class="section-heading">
+            <span class="section-tag">O'qituvchilar</span>
+            <h2 class="section-title">Bizning ustozlarimiz</h2>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="classes">
+        <div class="container">
+          <div class="section-heading">
+            <span class="section-tag">Darslar</span>
+            <h2 class="section-title">Ta'lim yo'nalishlari</h2>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="container">
+          <div class="section-heading">
+            <span class="section-tag">Bog'lanish</span>
+            <h2 class="section-title">Biz bilan aloqa</h2>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>© 2026 Pastdarg'om tumani 65-sonli Umumta'lim Maktabi. Barcha huquqlar himoyalangan.</p>
+      </div>
+    </footer>
   </body>
 </html>
-
