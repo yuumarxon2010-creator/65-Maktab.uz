@@ -1,0 +1,83 @@
+backend:
+  name: github
+  repo: yuumarxon2010-creator/65-Maktab.uz
+  branch: main
+  base_url: https://crimson-art-0f5b.y-u-umarxon2010.workers.dev
+  auth_endpoint: auth
+
+publish_mode: simple
+
+locale: uz
+site_url: https://yuumarxon2010-creator.github.io/65-Maktab.uz
+display_url: https://yuumarxon2010-creator.github.io/65-Maktab.uz
+
+media_folder: images/uploads
+public_folder: /65-Maktab.uz/images/uploads
+
+collections:
+  - name: teachers
+    label: O'qituvchilar
+    files:
+      - name: teachers
+        label: O'qituvchilar ro'yxati
+        file: data/teachers.json
+        fields:
+          - label: O'qituvchilar
+            name: items
+            widget: list
+            summary: "{{fields.name}} — {{fields.subject}}"
+            fields:
+              - { label: F.I.Sh., name: name, widget: string }
+              - { label: Fan, name: subject, widget: string }
+              - { label: Rasm, name: photo, widget: image, required: false }
+              - { label: Qisqacha ma'lumot, name: bio, widget: text, required: false }
+
+  - name: lessons
+    label: Dars jadvali
+    files:
+      - name: lessons
+        label: Darslar
+        file: data/lessons.json
+        fields:
+          - label: Darslar
+            name: items
+            widget: list
+            summary: "{{fields.day}} — {{fields.title}}"
+            fields:
+              - { label: Sinf, name: grade, widget: string }
+              - { label: Kun, name: day, widget: string }
+              - { label: Vaqt, name: time, widget: string }
+              - { label: Fan / mavzu, name: title, widget: string }
+
+  - name: announcements
+    label: E'lonlar
+    files:
+      - name: announcements
+        label: E'lonlar ro'yxati
+        file: data/announcements.json
+        fields:
+          - label: E'lonlar
+            name: items
+            widget: list
+            summary: "{{fields.date}} — {{fields.title}}"
+            fields:
+              - { label: Sarlavha, name: title, widget: string }
+              - { label: Sana, name: date, widget: string }
+              - { label: Matn, name: body, widget: text }
+
+  - name: pages
+    label: Sayt matnlari
+    files:
+      - name: about
+        label: Maktab haqida
+        file: data/about.json
+        fields:
+          - { label: Sarlavha, name: title, widget: string }
+          - { label: Matn, name: body, widget: markdown }
+      - name: contacts
+        label: Aloqa
+        file: data/contacts.json
+        fields:
+          - { label: Telefon, name: phone, widget: string }
+          - { label: Manzil, name: address, widget: string }
+          - { label: Email, name: email, widget: string, required: false }
